@@ -91,9 +91,15 @@
 	    return response;
 	  });
 	};
+	var modifyEnvData = function modifyEnvData(data) {
+	  return db.child('env').update(data, function (response) {
+	    return response;
+	  });
+	};
 	var actions = {
 	  modifyTeamData: modifyTeamData,
-	  modifyGarenaData: modifyGarenaData
+	  modifyGarenaData: modifyGarenaData,
+	  modifyEnvData: modifyEnvData
 	};
 
 	db.on('value', function (snapshot) {
@@ -30793,7 +30799,7 @@
 
 
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, ".header-div {\n  padding-top: 20px;\n  padding-bottom: 10px;\n}\n\n.btn:focus {\n  outline: none;\n}\n\n.brightTheme {\n  color: #292b2c;\n  background-color: white; \n}\n\n.darkTheme {\n  color: white;\n  background-color: #292b2c;\n}\n", ""]);
 
 	// exports
 
@@ -31110,7 +31116,7 @@
 /* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -31140,28 +31146,40 @@
 
 	    _this.state = {};
 	    _this.tick = _this.tick.bind(_this);
+	    _this.switchTiming = _this.switchTiming.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(Island, [{
-	    key: "componentWillMount",
-	    value: function componentWillMount() {}
-	  }, {
-	    key: "componentDidMount",
+	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.tick();
-	      this.timer = setInterval(this.tick, 2000);
+	      this.timer = setInterval(this.tick, 1000);
+	      document.body.classList.add(this.props.env.timing === 'daytime' ? 'brightTheme' : 'darkTheme');
 	    }
 	  }, {
-	    key: "componentWillUnmount",
+	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
 	      clearInterval(this.timer);
 	    }
 	  }, {
-	    key: "tick",
+	    key: 'tick',
 	    value: function tick() {}
 	  }, {
-	    key: "render",
+	    key: 'switchTiming',
+	    value: function switchTiming() {
+	      if (this.props.env.timing === 'daytime') {
+	        this.props.modifyEnvData({ 'timing': 'night' });
+	        document.body.classList.add('darkTheme');
+	        document.body.classList.remove('brightTheme');
+	      } else {
+	        this.props.modifyEnvData({ 'timing': 'daytime' });
+	        document.body.classList.remove('darkTheme');
+	        document.body.classList.add('brightTheme');
+	      }
+	    }
+	  }, {
+	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
 
@@ -31169,50 +31187,50 @@
 	      var teamID2 = ["7a", "7b", "7c", "7d", "7e", "7f", "8a", "8b", "8c", "8d", "8e", "8f", "9a", "9b", "9c", "9d", "9e", "9f", "10a", "10b", "10c", "10d", "10e", "10f", "11a", "11b", "11c", "11d", "11e", "11f", "12a", "12b", "12c", "12d", "12e", "12f"];
 	      var showTeamData1 = teamID1.map(function (item, key) {
 	        return _react2.default.createElement(
-	          "tr",
+	          'tr',
 	          { key: key },
 	          _react2.default.createElement(
-	            "th",
+	            'th',
 	            null,
 	            item
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['life']
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['money']
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['earned']
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['hunted']
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['kill']
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['death']
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['head']
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['jail']
 	          )
@@ -31220,50 +31238,50 @@
 	      });
 	      var showTeamData2 = teamID2.map(function (item, key) {
 	        return _react2.default.createElement(
-	          "tr",
+	          'tr',
 	          { key: key },
 	          _react2.default.createElement(
-	            "th",
+	            'th',
 	            null,
 	            item
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['life']
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['money']
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['earned']
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['hunted']
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['kill']
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['death']
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['head']
 	          ),
 	          _react2.default.createElement(
-	            "td",
+	            'td',
 	            null,
 	            _this2.props.teams[item]['jail']
 	          )
@@ -31271,138 +31289,157 @@
 	      });
 
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "container" },
+	        'div',
+	        { className: 'container' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "row" },
+	          'div',
+	          { className: 'row header-div' },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "col-6", style: { "padding": "10px" } },
+	            'div',
+	            { className: 'col-4' },
 	            _react2.default.createElement(
-	              "table",
-	              { className: "table" },
+	              'button',
+	              {
+	                type: 'button',
+	                className: "btn " + (this.props.env.timing === "daytime" ? "btn-outline-danger" : "btn-danger"),
+	                onClick: function onClick() {
+	                  return _this2.switchTiming();
+	                } },
+	              'Switch to ',
+	              this.props.env.timing === "daytime" ? "night" : "daytime"
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-6', style: { "padding": "10px" } },
+	            _react2.default.createElement(
+	              'table',
+	              { className: 'table' },
 	              _react2.default.createElement(
-	                "thead",
+	                'thead',
 	                { style: { "textAlign": "center" } },
 	                _react2.default.createElement(
-	                  "tr",
+	                  'tr',
 	                  null,
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u968A"
+	                    '\u968A'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u547D"
+	                    '\u547D'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u9322"
+	                    '\u9322'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u8CFA"
+	                    '\u8CFA'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u8CDE"
+	                    '\u8CDE'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u6BBA"
+	                    '\u6BBA'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u4EA1"
+	                    '\u4EA1'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u982D"
+	                    '\u982D'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u7344"
+	                    '\u7344'
 	                  )
 	                )
 	              ),
 	              _react2.default.createElement(
-	                "tbody",
+	                'tbody',
 	                null,
 	                showTeamData1
 	              )
 	            )
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "col-6", style: { "padding": "10px" } },
+	            'div',
+	            { className: 'col-6', style: { "padding": "10px" } },
 	            _react2.default.createElement(
-	              "table",
-	              { className: "table" },
+	              'table',
+	              { className: 'table' },
 	              _react2.default.createElement(
-	                "thead",
+	                'thead',
 	                { style: { "textAlign": "center" } },
 	                _react2.default.createElement(
-	                  "tr",
+	                  'tr',
 	                  null,
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u968A"
+	                    '\u968A'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u547D"
+	                    '\u547D'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u9322"
+	                    '\u9322'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u8CFA"
+	                    '\u8CFA'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u8CDE"
+	                    '\u8CDE'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u6BBA"
+	                    '\u6BBA'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u4EA1"
+	                    '\u4EA1'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u982D"
+	                    '\u982D'
 	                  ),
 	                  _react2.default.createElement(
-	                    "th",
+	                    'th',
 	                    null,
-	                    "\u7344"
+	                    '\u7344'
 	                  )
 	                )
 	              ),
 	              _react2.default.createElement(
-	                "tbody",
+	                'tbody',
 	                null,
 	                showTeamData2
 	              )
