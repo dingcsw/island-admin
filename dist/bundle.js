@@ -30799,7 +30799,7 @@
 
 
 	// module
-	exports.push([module.id, ".header-div {\n  padding-top: 20px;\n  padding-bottom: 10px;\n}\n\n.btn:focus {\n  outline: none;\n}\n\n.brightTheme {\n  color: #292b2c;\n  background-color: white; \n}\n\n.darkTheme {\n  color: white;\n  background-color: #292b2c;\n}\n", ""]);
+	exports.push([module.id, "body {\n  background-color: #577C8A;\n}\n\n.bulletin-title {\n  padding-top: 30px;\n  padding-bottom: 30px;\n  font-size: 50px;\n  font-weight: bold;\n  color: #FBE251;\n  text-align: center;\n}", ""]);
 
 	// exports
 
@@ -31122,6 +31122,8 @@
 	  value: true
 	});
 
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
@@ -31130,11 +31132,16 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var teamNames = ['新垣結1', 'W兩個動物', '友三', '兔4夾蛋', '五龍五濕', '你好6哦', '鼻要森七七', '天龍八布', '瑋魚杜九是厲害', '十力派大頭柴柴', '喔伊十一', '自十二果'];
+	var teamID = ["1a", "1b", "1c", "1d", "1e", "1f", "2a", "2b", "2c", "2d", "2e", "2f", "3a", "3b", "3c", "3d", "3e", "3f", "4a", "4b", "4c", "4d", "4e", "4f", "5a", "5b", "5c", "5d", "5e", "5f", "6a", "6b", "6c", "6d", "6e", "6f", "7a", "7b", "7c", "7d", "7e", "7f", "8a", "8b", "8c", "8d", "8e", "8f", "9a", "9b", "9c", "9d", "9e", "9f", "10a", "10b", "10c", "10d", "10e", "10f", "11a", "11b", "11c", "11d", "11e", "11f", "12a", "12b", "12c", "12d", "12e", "12f"];
 
 	var Island = function (_Component) {
 	  _inherits(Island, _Component);
@@ -31144,18 +31151,17 @@
 
 	    var _this = _possibleConstructorReturn(this, (Island.__proto__ || Object.getPrototypeOf(Island)).call(this));
 
-	    _this.state = {};
+	    _this.state = {
+	      currentPage: 2
+	    };
 	    _this.tick = _this.tick.bind(_this);
-	    _this.switchTiming = _this.switchTiming.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(Island, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.tick();
-	      this.timer = setInterval(this.tick, 1000);
-	      document.body.classList.add(this.props.env.timing === 'daytime' ? 'brightTheme' : 'darkTheme');
+	      this.timer = setInterval(this.tick, 5000);
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -31164,150 +31170,434 @@
 	    }
 	  }, {
 	    key: 'tick',
-	    value: function tick() {}
-	  }, {
-	    key: 'switchTiming',
-	    value: function switchTiming() {
-	      if (this.props.env.timing === 'daytime') {
-	        this.props.modifyEnvData({ 'timing': 'night' });
-	        document.body.classList.add('darkTheme');
-	        document.body.classList.remove('brightTheme');
-	      } else {
-	        this.props.modifyEnvData({ 'timing': 'daytime' });
-	        document.body.classList.remove('darkTheme');
-	        document.body.classList.add('brightTheme');
-	      }
+	    value: function tick() {
+	      this.setState({ currentPage: (this.state.currentPage + 1) % 4 });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
 
-	      var teamID1 = ["1a", "1b", "1c", "1d", "1e", "1f", "2a", "2b", "2c", "2d", "2e", "2f", "3a", "3b", "3c", "3d", "3e", "3f", "4a", "4b", "4c", "4d", "4e", "4f", "5a", "5b", "5c", "5d", "5e", "5f", "6a", "6b", "6c", "6d", "6e", "6f"];
-	      var teamID2 = ["7a", "7b", "7c", "7d", "7e", "7f", "8a", "8b", "8c", "8d", "8e", "8f", "9a", "9b", "9c", "9d", "9e", "9f", "10a", "10b", "10c", "10d", "10e", "10f", "11a", "11b", "11c", "11d", "11e", "11f", "12a", "12b", "12c", "12d", "12e", "12f"];
-	      var showTeamData1 = teamID1.map(function (item, key) {
-	        return _react2.default.createElement(
-	          'tr',
-	          { key: key },
-	          _react2.default.createElement(
-	            'th',
-	            null,
-	            item
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['life']
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['money']
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['earned']
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['hunted']
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['kill']
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['death']
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['head']
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['jail']
-	          )
-	        );
-	      });
-	      var showTeamData2 = teamID2.map(function (item, key) {
-	        return _react2.default.createElement(
-	          'tr',
-	          { key: key },
-	          _react2.default.createElement(
-	            'th',
-	            null,
-	            item
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['life']
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['money']
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['earned']
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['hunted']
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['kill']
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['death']
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['head']
-	          ),
-	          _react2.default.createElement(
-	            'td',
-	            null,
-	            _this2.props.teams[item]['jail']
-	          )
-	        );
-	      });
+	      var currentPage = this.state.currentPage;
+
+
+	      var showTitle = function () {
+	        switch (currentPage) {
+	          case 0:
+	            return '金錢排名';
+	          case 1:
+	            return '戰鬥排名';
+	          case 2:
+	            return '監獄';
+	          case 3:
+	            return '競技場佔領';
+	        }
+	      }();
+
+	      var showContent = function () {
+	        var _ret = function () {
+	          switch (currentPage) {
+	            case 0:
+	              var maxMoneyTeam = void 0,
+	                  maxMoneyPlayer = void 0,
+	                  maxMoneyByTeam = 0,
+	                  maxMoneyByPlayer = 0;
+
+	              var _loop = function _loop(i) {
+	                var teamMoney = 0;
+	                ['a', 'b', 'c', 'd', 'e', 'f'].forEach(function (item) {
+	                  var playerMoney = _this2.props.teams[String(i) + item]['money'];
+	                  if (playerMoney > maxMoneyByPlayer) {
+	                    maxMoneyByPlayer = playerMoney;
+	                    maxMoneyPlayer = String(i) + item;
+	                  }
+	                  teamMoney += playerMoney;
+	                });
+	                if (teamMoney > maxMoneyByTeam) {
+	                  maxMoneyByTeam = teamMoney;
+	                  maxMoneyTeam = i;
+	                }
+	              };
+
+	              for (var i = 1; i <= 12; ++i) {
+	                _loop(i);
+	              }
+
+	              return {
+	                v: _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-3' },
+	                      '\u6700\u591A\u91D1\u9322\u5C0F\u968A'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-3' },
+	                      '\u7B2C',
+	                      maxMoneyTeam,
+	                      '\u5C0F\u968A'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-3' },
+	                      teamNames[maxMoneyTeam]
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-3' },
+	                      maxMoneyByTeam,
+	                      '\u5143'
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-3' },
+	                      '\u6700\u591A\u91D1\u9322\u7D44\u5225'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-4' },
+	                      maxMoneyPlayer,
+	                      '\u5C0F\u7D44'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-5' },
+	                      maxMoneyByPlayer,
+	                      '\u5143'
+	                    )
+	                  )
+	                )
+	              };
+	            case 1:
+	              var maxKill = 0,
+	                  maxKillTeam = [],
+	                  maxDeath = 0,
+	                  maxDeathTeam = [],
+	                  maxHead = 0,
+	                  maxHeadTeam = [];
+	              teamID.forEach(function (item) {
+	                var _props$teams$item = _this2.props.teams[item],
+	                    kill = _props$teams$item.kill,
+	                    death = _props$teams$item.death,
+	                    head = _props$teams$item.head;
+
+	                if (kill > maxKill) {
+	                  maxKill = kill;
+	                  maxKillTeam = [item];
+	                } else if (kill === maxKill) {
+	                  maxKillTeam = [item].concat(_toConsumableArray(maxKillTeam));
+	                }
+	                if (head > maxHead) {
+	                  maxHead = head;
+	                  maxHeadTeam = [item];
+	                } else if (head === maxHead) {
+	                  maxHeadTeam = [item].concat(_toConsumableArray(maxHeadTeam));
+	                }
+	                if (death > maxDeath) {
+	                  maxDeath = death;
+	                  maxDeathTeam = [item];
+	                } else if (death === maxDeath) {
+	                  maxDeathTeam = [item].concat(_toConsumableArray(maxDeathTeam));
+	                }
+	              });
+
+	              return {
+	                v: _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-4' },
+	                      '\u6BBA\u6575\u6700\u591A'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-4' },
+	                      '\u6536\u982D\u6700\u591A'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-4' },
+	                      '\u88AB\u6BBA\u6700\u591A'
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-4' },
+	                      maxKillTeam,
+	                      '\u5C0F\u7D44'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-4' },
+	                      maxHeadTeam,
+	                      '\u5C0F\u7D44'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-4' },
+	                      maxDeathTeam,
+	                      '\u5C0F\u7D44'
+	                    )
+	                  )
+	                )
+	              };
+	            case 2:
+	              var inJailCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+	              teamID.forEach(function (item) {
+	                if (_this2.props.teams[item]['jail'] === 'in') inJailCount[Number(item.slice(0, -1)) - 1] += 1;
+	              });
+	              var d = new Date();
+	              var countdown = _this2.props.env.jailTimestamp === 0 ? 0 : 1000 * 60 * 20 - d.getTime() + _this2.props.env.jailTimestamp;
+	              var countdownShow = String(Math.floor(countdown / 60000)) + ':' + String(Math.floor(countdown % 60000 / 1000));
+	              return {
+	                v: _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      '1\u5C0F'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      '2\u5C0F'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      '3\u5C0F'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      '4\u5C0F'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      '5\u5C0F'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      '6\u5C0F'
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      inJailCount[0],
+	                      '\u7D44'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      inJailCount[1],
+	                      '\u7D44'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      inJailCount[2],
+	                      '\u7D44'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      inJailCount[3],
+	                      '\u7D44'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      inJailCount[4],
+	                      '\u7D44'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      inJailCount[5],
+	                      '\u7D44'
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      '7\u5C0F'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      '8\u5C0F'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      '9\u5C0F'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      '10\u5C0F'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      '11\u5C0F'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      '12\u5C0F'
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      inJailCount[6],
+	                      '\u7D44'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      inJailCount[7],
+	                      '\u7D44'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      inJailCount[8],
+	                      '\u7D44'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      inJailCount[9],
+	                      '\u7D44'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      inJailCount[10],
+	                      '\u7D44'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-2' },
+	                      inJailCount[11],
+	                      '\u7D44'
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-6' },
+	                      '\u8655\u5211\u5012\u6578\u6642\u9593'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-6' },
+	                      countdownShow
+	                    )
+	                  )
+	                )
+	              };
+	            case 3:
+	              return {
+	                v: _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-6' },
+	                      '\u63A9\u57CB\u5834\u7AF6\u6280\u5834'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-6' },
+	                      _this2.props.garenas['g1']['team']
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-6' },
+	                      '\u5893\u5712\u7AF6\u6280\u5834'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-6' },
+	                      _this2.props.garenas['g2']['team']
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-6' },
+	                      '\u5CA9\u7A9F\u7AF6\u6280\u5834'
+	                    ),
+	                    _react2.default.createElement(
+	                      'div',
+	                      { className: 'col-6' },
+	                      _this2.props.garenas['g3']['team']
+	                    )
+	                  )
+	                )
+	              };;
+	          }
+	        }();
+
+	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	      }();
 
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'container' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'row header-div' },
+	          { className: 'row bulletin-title' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-4' },
-	            _react2.default.createElement(
-	              'button',
-	              {
-	                type: 'button',
-	                className: "btn " + (this.props.env.timing === "daytime" ? "btn-outline-danger" : "btn-danger"),
-	                onClick: function onClick() {
-	                  return _this2.switchTiming();
-	                } },
-	              'Switch to ',
-	              this.props.env.timing === "daytime" ? "night" : "daytime"
-	            )
+	            { className: 'col-12' },
+	            showTitle
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -31315,135 +31605,8 @@
 	          { className: 'row' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-6', style: { "padding": "10px" } },
-	            _react2.default.createElement(
-	              'table',
-	              { className: 'table' },
-	              _react2.default.createElement(
-	                'thead',
-	                { style: { "textAlign": "center" } },
-	                _react2.default.createElement(
-	                  'tr',
-	                  null,
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u968A'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u547D'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u9322'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u8CFA'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u8CDE'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u6BBA'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u4EA1'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u982D'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u7344'
-	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'tbody',
-	                null,
-	                showTeamData1
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'col-6', style: { "padding": "10px" } },
-	            _react2.default.createElement(
-	              'table',
-	              { className: 'table' },
-	              _react2.default.createElement(
-	                'thead',
-	                { style: { "textAlign": "center" } },
-	                _react2.default.createElement(
-	                  'tr',
-	                  null,
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u968A'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u547D'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u9322'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u8CFA'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u8CDE'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u6BBA'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u4EA1'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u982D'
-	                  ),
-	                  _react2.default.createElement(
-	                    'th',
-	                    null,
-	                    '\u7344'
-	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'tbody',
-	                null,
-	                showTeamData2
-	              )
-	            )
+	            { className: 'col-12' },
+	            showContent
 	          )
 	        )
 	      );
