@@ -31171,6 +31171,8 @@
 	  }, {
 	    key: "switchTiming",
 	    value: function switchTiming() {
+	      var _this2 = this;
+
 	      if (this.props.env.timing === 'daytime') {
 	        this.props.modifyEnvData({ 'timing': 'night' });
 	        document.body.classList.add('darkTheme');
@@ -31179,28 +31181,37 @@
 	        this.props.modifyEnvData({ 'timing': 'daytime' });
 	        document.body.classList.remove('darkTheme');
 	        document.body.classList.add('brightTheme');
+	        teamID.forEach(function (item) {
+	          var earned = _this2.props.teams[item]['earned'];
+	          var newData = {
+	            'hunted': earned < 2001 ? 3000 : earned < 4001 ? 6000 : 9000,
+	            'earned': 0
+	          };
+	          _this2.props.modifyTeamData(newData, item);
+	        });
 	      }
 	    }
 	  }, {
 	    key: "purgeAll",
 	    value: function purgeAll() {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      teamID.forEach(function (item) {
-	        if (_this2.props.teams[item]['jail'] === 'in') {
+	        if (_this3.props.teams[item]['jail'] === 'in') {
 	          var newData = {
-	            'money': _this2.props.teams[item]['money'] - 2000,
+	            'money': _this3.props.teams[item]['money'] - 2000,
 	            'jail': 'free',
 	            'hunted': 3000
 	          };
-	          _this2.props.modifyTeamData(newData, item);
+	          _this3.props.modifyTeamData(newData, item);
 	        }
 	      });
+	      this.props.modifyEnvData({ jailTimestamp: 0 });
 	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      var _this3 = this;
+	      var _this4 = this;
 
 	      var teamID1 = ["1a", "1b", "1c", "1d", "1e", "1f", "2a", "2b", "2c", "2d", "2e", "2f", "3a", "3b", "3c", "3d", "3e", "3f", "4a", "4b", "4c", "4d", "4e", "4f", "5a", "5b", "5c", "5d", "5e", "5f", "6a", "6b", "6c", "6d", "6e", "6f"];
 	      var teamID2 = ["7a", "7b", "7c", "7d", "7e", "7f", "8a", "8b", "8c", "8d", "8e", "8f", "9a", "9b", "9c", "9d", "9e", "9f", "10a", "10b", "10c", "10d", "10e", "10f", "11a", "11b", "11c", "11d", "11e", "11f", "12a", "12b", "12c", "12d", "12e", "12f"];
@@ -31216,42 +31227,42 @@
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['life']
+	            _this4.props.teams[item]['life']
 	          ),
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['money']
+	            _this4.props.teams[item]['money']
 	          ),
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['earned']
+	            _this4.props.teams[item]['earned']
 	          ),
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['hunted']
+	            _this4.props.teams[item]['hunted']
 	          ),
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['kill']
+	            _this4.props.teams[item]['kill']
 	          ),
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['death']
+	            _this4.props.teams[item]['death']
 	          ),
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['head']
+	            _this4.props.teams[item]['head']
 	          ),
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['jail']
+	            _this4.props.teams[item]['jail']
 	          )
 	        );
 	      });
@@ -31267,42 +31278,42 @@
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['life']
+	            _this4.props.teams[item]['life']
 	          ),
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['money']
+	            _this4.props.teams[item]['money']
 	          ),
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['earned']
+	            _this4.props.teams[item]['earned']
 	          ),
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['hunted']
+	            _this4.props.teams[item]['hunted']
 	          ),
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['kill']
+	            _this4.props.teams[item]['kill']
 	          ),
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['death']
+	            _this4.props.teams[item]['death']
 	          ),
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['head']
+	            _this4.props.teams[item]['head']
 	          ),
 	          _react2.default.createElement(
 	            "td",
 	            null,
-	            _this3.props.teams[item]['jail']
+	            _this4.props.teams[item]['jail']
 	          )
 	        );
 	      });
@@ -31322,7 +31333,7 @@
 	                type: "button",
 	                className: "btn " + (this.props.env.timing === "daytime" ? "btn-outline-danger" : "btn-danger"),
 	                onClick: function onClick() {
-	                  return _this3.switchTiming();
+	                  return _this4.switchTiming();
 	                } },
 	              "Switch to ",
 	              this.props.env.timing === "daytime" ? "night" : "daytime"
@@ -31337,7 +31348,7 @@
 	                type: "button",
 	                className: "btn " + (this.props.env.timing === "daytime" ? "btn-outline-danger" : "btn-danger"),
 	                onClick: function onClick() {
-	                  return _this3.purgeAll();
+	                  return _this4.purgeAll();
 	                } },
 	              "Purge all"
 	            )
