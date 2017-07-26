@@ -86,8 +86,8 @@
 	    return response;
 	  });
 	};
-	var modifyGarenaData = function modifyGarenaData(data, id) {
-	  return db.child('garenas/' + id).update(data, function (response) {
+	var modifyArenaData = function modifyArenaData(data, id) {
+	  return db.child('arenas/' + id).update(data, function (response) {
 	    return response;
 	  });
 	};
@@ -98,7 +98,7 @@
 	};
 	var actions = {
 	  modifyTeamData: modifyTeamData,
-	  modifyGarenaData: modifyGarenaData,
+	  modifyArenaData: modifyArenaData,
 	  modifyEnvData: modifyEnvData
 	};
 
@@ -31177,17 +31177,22 @@
 	        this.props.modifyEnvData({ 'timing': 'night' });
 	        document.body.classList.add('darkTheme');
 	        document.body.classList.remove('brightTheme');
+	        teamID.forEach(function (item) {
+	          _this2.props.modifyTeamData({ 'earned': 0 }, item);
+	        });
 	      } else {
 	        this.props.modifyEnvData({ 'timing': 'daytime' });
 	        document.body.classList.remove('darkTheme');
 	        document.body.classList.add('brightTheme');
+	        ['1', '2', '3'].forEach(function (item) {
+	          if (_this2.props.arenas[item]['team'] !== "" && _this2.props.arenas[item]['moneyToGet'] === 0) {
+	            var d = new Date();
+	            var earn = Math.floor((d.getTime() - _this2.props.arenas[item]['timestamp']) / 30000) * 1000;
+	            _this2.props.modifyArenaData({ moneyToGet: earn, timestamp: 0 }, item);
+	          }
+	        });
 	        teamID.forEach(function (item) {
-	          var earned = _this2.props.teams[item]['earned'];
-	          var newData = {
-	            'hunted': earned < 2001 ? 3000 : earned < 4001 ? 6000 : 9000,
-	            'earned': 0
-	          };
-	          _this2.props.modifyTeamData(newData, item);
+	          _this2.props.modifyTeamData({ recover: false }, item);
 	        });
 	      }
 	    }
@@ -31196,17 +31201,18 @@
 	    value: function purgeAll() {
 	      var _this3 = this;
 
+	      var teamMoney = this.props.env['teamMoney'];
 	      teamID.forEach(function (item) {
 	        if (_this3.props.teams[item]['jail'] === 'in') {
-	          var newData = {
-	            'money': _this3.props.teams[item]['money'] - 2000,
+	          var newData1 = {
 	            'jail': 'free',
 	            'hunted': 3000
 	          };
-	          _this3.props.modifyTeamData(newData, item);
+	          _this3.props.modifyTeamData(newData1, item);
+	          teamMoney[item.slice(0, -1)] -= 3000;
 	        }
 	      });
-	      this.props.modifyEnvData({ jailTimestamp: 0 });
+	      this.props.modifyEnvData({ jailTimestamp: 0, teamMoney: teamMoney });
 	    }
 	  }, {
 	    key: "render",
